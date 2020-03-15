@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'Page Produit'| trans}}{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h1>{{'Liste des Produits'| trans}}</h1>
+    <hr>
+
+    {% if produits|length >0 %}
+      {% for produit in produits  %}
+        <div class="row">
+        <div class="col-4">
+          <div class="card" style="width: 18rem;">
+            {% if produit.photo is not null %}
+              <img  class="card-img-top" src="{{ asset('assets/images/' ~ produit.photo) }}" style="height:18rem"/>
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ produit.nom }}</h5>
+              <a href="{{ path('produit',{id :produit.id}) }}" class="btn btn-dark">{{'voir produit'| trans}}</a>
+            </div>
+          </div>
+        </div>
+    </div>
+      {% endfor %}
+    {% else %}
+      <p>{{"Produit Indisponible..."| trans}}</p>
+    {% endif %}
+  <br>
+    <div class="card bg-light" style='padding: 30px'>
+      {{ form(formprod) }}
+    </div>
+</div>
+{% endblock %}

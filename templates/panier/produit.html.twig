@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'Fiche Produit'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{'Fiche Produit'|trans}}: {{ produit.nom }}</h1>
+        <div class="row">
+            <div class="col-6">
+                {% if produit.photo is not null %}
+                    <img   src="{{ asset('assets/images/' ~ produit.photo) }}" width="300px"/>
+                {% endif %}
+            </div>
+            <div class="col-6 text-left text-align-center">
+                <p>stock: {{ produit.quantite }}</p>
+                <p>{{'prix'|trans}}: {{ produit.prix }}€</p>
+            </div>
+        </div>
+        <br>
+        <div class="card bg-light" style='padding: 20px'>
+            {{ form(formpanier) }}
+        </div>
+        <div class="card bg-light text-center" style='padding: 20px'>
+            <a href="{{ path('removeproduit',{id: produit.id}) }}" class="btn btn-danger">{{'supprimer'|trans}}</a>
+        </div>
+    </div>
+{% endblock %}
